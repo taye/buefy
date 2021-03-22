@@ -178,6 +178,7 @@ exports.Taginput = taginput['default'];
 exports.Timepicker = timepicker['default'];
 exports.Toast = toast['default'];
 exports.ToastProgrammatic = toast.ToastProgrammatic;
+exports.useToast = toast.useToast;
 exports.Tooltip = tooltip['default'];
 exports.Upload = upload['default'];
 exports.bound = helpers.bound;

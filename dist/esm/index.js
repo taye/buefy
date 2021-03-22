@@ -73,7 +73,7 @@ export { default as Taginput } from './taginput.js';
 import Plugin$A from './timepicker.js';
 export { default as Timepicker } from './timepicker.js';
 import Plugin$B from './toast.js';
-export { default as Toast, ToastProgrammatic } from './toast.js';
+export { default as Toast, ToastProgrammatic, useToast } from './toast.js';
 import Plugin$C from './tooltip.js';
 export { default as Tooltip } from './tooltip.js';
 import Plugin$D from './upload.js';

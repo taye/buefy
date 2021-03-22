@@ -16809,6 +16809,38 @@
     }
   };
   use(Plugin$2);
+  /**
+   * <template>
+   *   <b-button @click="Toast.open">click me</button>
+   *   <component :is="Toast">
+   *     Success!
+   *   </component>
+   * </template>
+   * <script>
+   * export default {
+   *   setup() {
+   *     const Toast = useToast({ type: 'is-success' })
+   *
+   *     return { Toast }
+   *   }
+   * }
+   * </script>
+   */
+
+  function useToast(hookProps) {
+    var isOpen = vue.ref(false);
+
+    var UseToast = function UseToast(props, context) {
+      if (!isOpen.value) return null;
+      return vue.h(script$1, merge(hookProps, props), context.slots.default);
+    };
+
+    UseToast.open = function () {
+      isOpen.value = true;
+    };
+
+    return UseToast;
+  }
 
   var Plugin$1 = {
     install: function install(Vue) {
@@ -17142,6 +17174,7 @@
   exports.removeElement = removeElement;
   exports.sign = sign;
   exports.toCssWidth = toCssWidth;
+  exports.useToast = useToast;
 
   Object.defineProperty(exports, '__esModule', { value: true });
 

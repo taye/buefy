@@ -1,5 +1,5 @@
 /*! Buefy v0.9.4 | MIT License | github.com/buefy/buefy */
-import { openBlock, createBlock, resolveDynamicComponent, resolveComponent, mergeProps, createCommentVNode, toDisplayString, createVNode, withKeys, withModifiers, Transition, withCtx, withDirectives, renderSlot, Fragment, renderList, vShow, toHandlers, vModelCheckbox, h, resolveDirective, createTextVNode, createSlots, vModelSelect, vModelDynamic, vModelRadio, defineComponent, toHandlerKey } from 'vue';
+import { openBlock, createBlock, resolveDynamicComponent, resolveComponent, mergeProps, createCommentVNode, toDisplayString, createVNode, withKeys, withModifiers, Transition, withCtx, withDirectives, renderSlot, Fragment, renderList, vShow, toHandlers, vModelCheckbox, h, resolveDirective, createTextVNode, createSlots, vModelSelect, vModelDynamic, vModelRadio, defineComponent, toHandlerKey, ref } from 'vue';
 
 function _typeof(obj) {
   "@babel/helpers - typeof";
@@ -16805,6 +16805,38 @@ var Plugin$2 = {
   }
 };
 use(Plugin$2);
+/**
+ * <template>
+ *   <b-button @click="Toast.open">click me</button>
+ *   <component :is="Toast">
+ *     Success!
+ *   </component>
+ * </template>
+ * <script>
+ * export default {
+ *   setup() {
+ *     const Toast = useToast({ type: 'is-success' })
+ *
+ *     return { Toast }
+ *   }
+ * }
+ * </script>
+ */
+
+function useToast(hookProps) {
+  var isOpen = ref(false);
+
+  var UseToast = function UseToast(props, context) {
+    if (!isOpen.value) return null;
+    return h(script$1, merge(hookProps, props), context.slots.default);
+  };
+
+  UseToast.open = function () {
+    isOpen.value = true;
+  };
+
+  return UseToast;
+}
 
 var Plugin$1 = {
   install: function install(Vue) {
@@ -17069,4 +17101,4 @@ var Buefy = {
 use(Buefy);
 
 export default Buefy;
-export { Plugin$D as Autocomplete, Plugin$C as Button, Plugin$B as Carousel, Plugin$A as Checkbox, Plugin$y as Clockpicker, Plugin$z as Collapse, ConfigComponent as ConfigProgrammatic, Plugin$x as Datepicker, Plugin$w as Datetimepicker, Plugin$v as Dialog, DialogProgrammatic, Plugin$u as Dropdown, Plugin$t as Field, Plugin$s as Icon, Plugin$r as Image, Plugin$q as Input, Plugin$p as Loading, LoadingProgrammatic, Plugin$o as Menu, Plugin$n as Message, Plugin$m as Modal, ModalProgrammatic, Plugin$k as Navbar, Plugin$l as Notification, NotificationProgrammatic, Plugin$j as Numberinput, Plugin$i as Pagination, Plugin$h as Progress, Plugin$g as Radio, Plugin$f as Rate, Plugin$e as Select, Plugin$c as Sidebar, Plugin$d as Skeleton, Plugin$b as Slider, Plugin$a as Snackbar, SnackbarProgrammatic, Plugin$9 as Steps, Plugin$8 as Switch, Plugin$7 as Table, Plugin$6 as Tabs, Plugin$5 as Tag, Plugin$4 as Taginput, Plugin$3 as Timepicker, Plugin$2 as Toast, ToastProgrammatic, Plugin$1 as Tooltip, Plugin as Upload, bound, createAbsoluteElement, createNewEvent, escapeRegExpChars, getMonthNames, getSlot$1 as getSlot, getValueByPath, getWeekdayNames, hasFlag, indexOf, isCustomElement, isDefined, isMobile, isVueComponent, isWebpSupported, matchWithGroups, merge, mod, multiColumnSort, removeElement, sign, toCssWidth };
+export { Plugin$D as Autocomplete, Plugin$C as Button, Plugin$B as Carousel, Plugin$A as Checkbox, Plugin$y as Clockpicker, Plugin$z as Collapse, ConfigComponent as ConfigProgrammatic, Plugin$x as Datepicker, Plugin$w as Datetimepicker, Plugin$v as Dialog, DialogProgrammatic, Plugin$u as Dropdown, Plugin$t as Field, Plugin$s as Icon, Plugin$r as Image, Plugin$q as Input, Plugin$p as Loading, LoadingProgrammatic, Plugin$o as Menu, Plugin$n as Message, Plugin$m as Modal, ModalProgrammatic, Plugin$k as Navbar, Plugin$l as Notification, NotificationProgrammatic, Plugin$j as Numberinput, Plugin$i as Pagination, Plugin$h as Progress, Plugin$g as Radio, Plugin$f as Rate, Plugin$e as Select, Plugin$c as Sidebar, Plugin$d as Skeleton, Plugin$b as Slider, Plugin$a as Snackbar, SnackbarProgrammatic, Plugin$9 as Steps, Plugin$8 as Switch, Plugin$7 as Table, Plugin$6 as Tabs, Plugin$5 as Tag, Plugin$4 as Taginput, Plugin$3 as Timepicker, Plugin$2 as Toast, ToastProgrammatic, Plugin$1 as Tooltip, Plugin as Upload, bound, createAbsoluteElement, createNewEvent, escapeRegExpChars, getMonthNames, getSlot$1 as getSlot, getValueByPath, getWeekdayNames, hasFlag, indexOf, isCustomElement, isDefined, isMobile, isVueComponent, isWebpSupported, matchWithGroups, merge, mod, multiColumnSort, removeElement, sign, toCssWidth, useToast };

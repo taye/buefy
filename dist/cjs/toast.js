@@ -2,9 +2,9 @@
 
 Object.defineProperty(exports, '__esModule', { value: true });
 
+var vue = require('vue');
 var config = require('./config-1bc87110.js');
 var NoticeMixin = require('./NoticeMixin-c28b24dd.js');
-var vue = require('vue');
 var helpers = require('./helpers.js');
 var plugins = require('./plugins-c99a13c9.js');
 require('./_rollupPluginBabelHelpers-a6b1b170.js');
@@ -98,7 +98,40 @@ var Plugin = {
   }
 };
 plugins.use(Plugin);
+/**
+ * <template>
+ *   <b-button @click="Toast.open">click me</button>
+ *   <component :is="Toast">
+ *     Success!
+ *   </component>
+ * </template>
+ * <script>
+ * export default {
+ *   setup() {
+ *     const Toast = useToast({ type: 'is-success' })
+ *
+ *     return { Toast }
+ *   }
+ * }
+ * </script>
+ */
+
+function useToast(hookProps) {
+  var isOpen = vue.ref(false);
+
+  var UseToast = function UseToast(props, context) {
+    if (!isOpen.value) return null;
+    return vue.h(script, helpers.merge(hookProps, props), context.slots.default);
+  };
+
+  UseToast.open = function () {
+    isOpen.value = true;
+  };
+
+  return UseToast;
+}
 
 exports.BToast = script;
 exports.ToastProgrammatic = ToastProgrammatic;
 exports.default = Plugin;
+exports.useToast = useToast;

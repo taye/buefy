@@ -1,6 +1,6 @@
+import { openBlock, createBlock, Transition, withCtx, withDirectives, createVNode, renderSlot, vShow, ref, h } from 'vue';
 import { c as config, V as VueInstance } from './config-63b70aae.js';
 import { N as NoticeMixin } from './NoticeMixin-a83d413b.js';
-import { openBlock, createBlock, Transition, withCtx, withDirectives, createVNode, renderSlot, vShow } from 'vue';
 import { merge } from './helpers.js';
 import { r as registerComponentProgrammatic, u as use } from './plugins-a0a180cf.js';
 import './_rollupPluginBabelHelpers-0979e6ce.js';
@@ -94,6 +94,38 @@ var Plugin = {
   }
 };
 use(Plugin);
+/**
+ * <template>
+ *   <b-button @click="Toast.open">click me</button>
+ *   <component :is="Toast">
+ *     Success!
+ *   </component>
+ * </template>
+ * <script>
+ * export default {
+ *   setup() {
+ *     const Toast = useToast({ type: 'is-success' })
+ *
+ *     return { Toast }
+ *   }
+ * }
+ * </script>
+ */
+
+function useToast(hookProps) {
+  var isOpen = ref(false);
+
+  var UseToast = function UseToast(props, context) {
+    if (!isOpen.value) return null;
+    return h(script, merge(hookProps, props), context.slots.default);
+  };
+
+  UseToast.open = function () {
+    isOpen.value = true;
+  };
+
+  return UseToast;
+}
 
 export default Plugin;
-export { script as BToast, ToastProgrammatic };
+export { script as BToast, ToastProgrammatic, useToast };
